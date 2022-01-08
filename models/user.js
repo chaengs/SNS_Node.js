@@ -13,6 +13,10 @@ module.exports = class User extends Sequelize.Model {
                 allowNull: false,
             },
             password: {
+                type: Sequelize.STRING(100),
+                allowNull: true,
+            },
+            provider: {
                 type: Sequelize.STRING(10),
                 allowNull: false,
                 defaultValue: 'local',
@@ -33,7 +37,7 @@ module.exports = class User extends Sequelize.Model {
         });
     }
 
-    static associate(db){
+    static associate(db) {
         db.User.hasMany(db.Post);
         db.User.belongsToMany(db.User, {
             foreignKey: 'followingId',
@@ -46,4 +50,4 @@ module.exports = class User extends Sequelize.Model {
             through: 'Follow',
         });
     }
-}
+};
